@@ -103,7 +103,7 @@ Web will run on local server (IIS Express)
 * search advance
 <img width="1919" height="1019" alt="Ảnh chụp màn hình 2026-04-28 223853" src="https://github.com/user-attachments/assets/e4e05099-ea5f-4a9c-a517-c5c4800053f4" />
 
-##🎯 Future Improvements
+## 🎯 Future Improvements
 Improve UI/UX design
 Add REST API
 Separate frontend & backend
