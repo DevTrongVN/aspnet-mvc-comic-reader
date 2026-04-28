@@ -452,7 +452,7 @@ namespace WebTruyenTranh.Controllers
             // Nếu vẫn null (không gửi ChapID), lấy Chap 1
             if (!idChap.HasValue)
             {
-                string strcon = @"data Source=LAPTOP-1T6H7HVR\MSSQLSERVER01; database=WebDocTruyen;User=sa;Password=123";
+                string strcon = @"Data Source=.;Initial Catalog=WebDocTruyen;Trusted_Connection=True;";
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
                     string strsel = "SELECT TOP 1 ChapID FROM Chap WHERE TruyenID=@IDTruyen ORDER BY SoChap ASC";

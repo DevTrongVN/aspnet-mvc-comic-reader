@@ -21,7 +21,7 @@ namespace WebTruyenTranh.Models
         public BinhLuanContainer(int idTruyen, int? chapID = null)
         {
             dsBinhLuan = new List<BinhLuanViewModel>();
-            string strcon = @"data Source=LAPTOP-1T6H7HVR\MSSQLSERVER01; database=WebDocTruyen;User=sa;Password=123";
+            string strcon = @"Data Source=.;Initial Catalog=WebDocTruyen;Trusted_Connection=True;";
             using (SqlConnection con = new SqlConnection(strcon))
             {
                 string strsel = @"
@@ -62,7 +62,7 @@ namespace WebTruyenTranh.Models
         }
         public void ThemBinhLuan(int idTruyen, int idNguoiDung, string noiDung, int? idChap = null)
         {
-            string strcon = @"data Source=LAPTOP-1T6H7HVR\MSSQLSERVER01; database=WebDocTruyen;User=sa;Password=123";
+            string strcon = @"Data Source=.;Initial Catalog=WebDocTruyen;Trusted_Connection=True;";
             using (SqlConnection con = new SqlConnection(strcon))
             {
                 string strins = @"
