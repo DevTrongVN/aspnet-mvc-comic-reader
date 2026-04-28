@@ -1,0 +1,13 @@
+﻿@using WebTruyenTranh.Models; 
+@model List<TheLoai>
+<div class="container border border-dark">
+<h3 style="color:blue" class="border-bottom">Thể Loại</h3>
+    <div class="row mt-3">
+        @foreach (TheLoai tl in Model)
+        {
+            <div class="col-6">
+                <a class="nav-link border-bottom" style="color:black" href="/Home/TimTheoTL/@tl.TheLoaiID">@tl.TenTheLoai</a>
+            </div>
+        }
+    </div>
+</div>

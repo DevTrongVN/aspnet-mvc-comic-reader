@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/NguoiDocTruyen.cshtml";
+}
+
+@using WebTruyenTranh.Models;
+@model List<Truyen>
+
+    <h3 style="color:blue" class="border-bottom">Truyện</h3>
+    <div class="row">
+        @if (@Model == null) { 
+            <div class="alert alert-warning">
+        Không tìm thấy truyện nào phù hợp với tiêu chí của bạn.
+            </div>
+        }
+        @foreach (Truyen a in Model)
+        {
+            <div class="col-3 mt-3">
+                <div class="card">
+                    <a style="color:black" href="#" class="card-title"><img class="w-100" style="height:200px;" src="~/Content/AnhBia/@a.AnhBia" class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <a style="color:black" href="/Home/ChiTietTruyen/@a.TruyenID" class="card-title">@a.TenTruyen</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+

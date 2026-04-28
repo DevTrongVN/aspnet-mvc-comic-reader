@@ -1,0 +1,90 @@
+﻿@model WebTruyenTranh.Models.Truyen
+
+@{
+    ViewBag.Title = "Them";
+
+    List<int> selectedTheLoaiIDs = ViewBag.SelectedTheLoaiIDs as List<int> ?? new List<int>();
+}
+
+<h2>Thêm Truyện Mới</h2>
+
+@using (Html.BeginForm("Them", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Truyện</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TenTruyen)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TenTruyen)
+            @Html.ValidationMessageFor(model => model.TenTruyen)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDTacGia)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.IDTacGia, (SelectList)ViewBag.TacGiaList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IDTacGia)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MoTa)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.MoTa, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.MoTa)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AnhBia)
+        </div>
+        <div class="editor-field">
+            <input type="file" name="AnhBiaFile" id="AnhBiaFile" class="form-control" accept="image/*" />
+            @Html.ValidationMessageFor(model => model.AnhBia)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TinhTrang)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TinhTrang, (SelectList)ViewBag.TinhTrangList, "--- Chọn Tình Trạng ---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TinhTrang)
+        </div>
+
+        <div class="form-group mt-3">
+            <label>Chọn Thể Loại:</label>
+            @if (ViewBag.TheLoaiList != null)
+            {
+                <div class="d-flex flex-wrap">
+                    @foreach (var item in (List<WebTruyenTranh.Models.TheLoai>)ViewBag.TheLoaiList)
+                    {
+                        <div class="form-check me-4">
+                            @{
+                        bool isChecked = selectedTheLoaiIDs.Contains(item.TheLoaiID);
+                            }
+                            <input type="checkbox"
+                                   name="TheLoaiIDs"
+                                   value="@item.TheLoaiID"
+                                   id="TheLoai_@item.TheLoaiID"
+                                   @(isChecked ? "checked" : "")
+                                   class="form-check-input" />
+                            <label class="form-check-label" for="TheLoai_@item.TheLoaiID">@item.TenTheLoai</label>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <p>
+            <input type="submit" value="Tạo Mới" class="btn btn-primary mt-3" />
+        </p>
+    </fieldset>
+}
+<a href="/Home/Index">Trang chủ</a>
+<div>
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</div>

@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "KetQuaTimKiem";
+    Layout = "~/Views/Shared/DangNhap.cshtml";
+}
+@using WebTruyenTranh.Models;
+@model List<Truyen>
+<h2>Kết Quả Tìm Kiếm</h2>
+@if (Model != null && Model.Any())
+{
+    <p>Tìm thấy **@Model.Count()** truyện phù hợp.</p>
+
+    <div class="row">
+        @foreach (var truyen in Model)
+        {
+       
+            <div class="col-md-3 mb-4">
+                <a href="@Url.Action("ChiTietTruyen", "Home", new { id = truyen.TruyenID })" class="card text-decoration-none">
+                    <img src="~/Content/AnhBia/@truyen.AnhBia" class="card-img-top" alt="@truyen.TenTruyen" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@truyen.TenTruyen</h5>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">
+        Không tìm thấy truyện nào phù hợp với tiêu chí của bạn.
+    </div>
+}

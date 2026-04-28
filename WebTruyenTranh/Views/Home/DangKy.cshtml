@@ -1,0 +1,63 @@
+﻿@model WebTruyenTranh.Models.Taikhoan
+
+@{
+    ViewBag.Title = "Đăng Ký Tài Khoản";
+    Layout = "~/Views/Shared/DangNhap.cshtml";
+
+    List<SelectListItem> gioiTinhList = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Nam", Text = "Nam", Selected = true },
+        new SelectListItem { Value = "Nữ", Text = "Nữ" }
+    };
+    ViewBag.GioiTinhList = gioiTinhList;
+}
+
+<h2 class="text-center">Đăng ký tài khoản</h2>
+
+@using (Html.BeginForm("DangKy", "Home", FormMethod.Post, new { @class = "form-register" }))
+{
+    @Html.AntiForgeryToken()
+
+    if (ViewBag.ThongBao != null)
+    {
+        <div class="alert alert-danger text-center" role="alert">
+            @ViewBag.ThongBao
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenDangNhap, "Tên đăng nhập:")
+        @Html.TextBoxFor(model => model.TenDangNhap, new { @class = "form-control", required = "required" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MatKhau, "Mật khẩu:")
+        @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", required = "required" })
+    </div>
+
+    <div class="form-group">
+        <label for="reMatKhau">Nhập lại mật khẩu:</label>
+        <input type="password" id="reMatKhau" name="reMatKhau" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HoTen, "Họ tên:")
+        @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, "Email:")
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GioiTinh, "Giới tính:")
+        @Html.DropDownListFor(model => model.GioiTinh, (IEnumerable<SelectListItem>)ViewBag.GioiTinhList, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3 w-100">Đăng ký</button>
+}
+
+<p class="text-center mt-3">
+    Đã có tài khoản? @Html.ActionLink("Đăng nhập", "DangNhap", "Home")
+</p>

@@ -1,0 +1,187 @@
+﻿@using WebTruyenTranh.Models;
+@model Truyen
+
+@{
+    ViewBag.Title = "ChiTietTruyen";
+    Layout = "~/Views/Shared/NguoiDocTruyen.cshtml";
+
+    TacGia t = ViewBag.tg as TacGia;
+    List<Chap> chap = ViewBag.SoChuong as List<Chap>;
+    List<TheLoai> tl = ViewBag.tl as List<TheLoai>;
+    List<Truyen> truyenGoiY = ViewBag.TruyenCungTL as List<Truyen>;
+
+    var user = Session["User"] as Taikhoan;
+    bool daTheoDoi = ViewBag.DaTheoDoi;
+    var danhGiaCuaToi = ViewBag.DanhGiaCuaToi as DANHGIA;
+}
+@if (TempData["ThongBao"] != null)
+{
+    <div class="alert alert-info">@TempData["ThongBao"]</div>
+}
+
+<h2 class="text-center">@Model.TenTruyen</h2>
+<p class="text-center" style="color:gray">[@Model.NgayCapNhat]</p>
+
+<div class="row">
+    <div class="col-4">
+        <img class="w-100" style="height:300px" src="~/Content/AnhBia/@Model.AnhBia" />
+    </div>
+
+    <div class="col-8">
+        <div class="row">
+            <div class="col-4">
+                <ul>
+                    <li>Tác Giả</li>
+                    <li>Tình Trạng</li>
+                    <li>Thể Loại</li>
+                    <li>Lượt Xem</li>
+                </ul>
+            </div>
+
+            <div class="col-8">
+                <a href="@Url.Action("TruyenTheoTacGia", "Home", new { id = t.IDTacGia })">@t.TenTacGia</a>
+                <br />
+                @Model.TinhTrang
+                <br />
+
+                @if (tl != null && tl.Any())
+                {
+                    for (int i = 0; i < tl.Count; i++)
+                    {
+                        <a href="@Url.Action("TimTheoTL", "Home", new { id = tl[i].TheLoaiID })">
+                            @tl[i].TenTheLoai
+                        </a>
+
+                        if (i < tl.Count - 1)
+                        { @: - 
+                        }
+                    }
+                }
+                else
+                {
+                    @:Đang cập nhật
+                }
+
+                <br />
+                    @Model.LuotXem
+                </div>
+            </div>
+
+                    <hr />
+
+                    @* ====================== ĐÁNH GIÁ ====================== *@
+                    @if (ViewBag.SoSaoTB != null)
+        {
+                        <p><strong>Điểm Trung Bình:</strong> @string.Format("{0:N1}", ViewBag.SoSaoTB) / 5 ⭐</p>
+                        <p><strong>Tổng Lượt Đánh Giá:</strong> @ViewBag.TongLuotDG lượt</p>
+        }
+        else
+        {
+                        <p>Truyện chưa có đánh giá nào.</p>
+        }
+
+                    <hr />
+                    <h4>Đánh giá truyện</h4>
+
+                    @if (user == null)
+        {
+                        <p class="text-danger">Bạn phải đăng nhập để đánh giá.</p>
+        }
+        else
+        {
+                        <form method="post" action="@Url.Action("DanhGia", "Home")">
+                            <input type="hidden" name="TruyenID" value="@Model.TruyenID" />
+
+                            <select name="Sao" class="form-control" style="width:150px">
+                                @for (int i = 1; i <= 5; i++)
+                    {
+                                    <option value="@i" @(danhGiaCuaToi != null && danhGiaCuaToi.SOSAO == i ? "selected" : "")>
+                                        @i sao
+                                    </option>
+                    }
+                            </select>
+
+                            <br />
+                            <button class="btn btn-success" type="submit">
+                                @(danhGiaCuaToi == null ? "Gửi đánh giá" : "Cập nhật đánh giá")
+                            </button>
+                        </form>
+        }
+
+                    <hr />
+
+                    @* ====================== THEO DÕI ====================== *@
+                    @if (user == null)
+        {
+                        <button class="btn btn-secondary" disabled>Đăng nhập để theo dõi</button>
+        }
+        else if (daTheoDoi)
+        {
+            <form action="@Url.Action("TheoDoi", "Home")" method="post">
+                <input type="hidden" name="TruyenID" value="@Model.TruyenID" />
+                <button type="submit" class="btn btn-danger">Bỏ theo dõi</button>
+            </form>
+        }
+        else
+        {
+            <form action="@Url.Action("TheoDoi", "Home")" method="post">
+                <input type="hidden" name="TruyenID" value="@Model.TruyenID" />
+                <button type="submit" class="btn btn-primary">Theo dõi</button>
+            </form>
+        }
+                </div>
+            </div>
+
+            <h3 class="border-bottom" style="color:blue">Danh Sách Chương</h3>
+
+            <div class="container border border-dark">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="border-bottom">Số Chương</h4>
+
+                        @foreach (Chap a in chap)
+            {
+                            <p>
+                                @Html.ActionLink(
+                        "Chương " + a.SoChap,
+                        "AnhChap",
+                        "Home",
+                        new { ID = a.TruyenID, chapID = a.ChapID },
+                        new { @class = "border-bottom" }
+                    )
+                            </p>
+            }
+                    </div>
+
+                    <div class="col-6">
+                        <h4 class="border-bottom">Ngày cập nhật</h4>
+                        @foreach (Chap a in chap)
+            {
+                            <p class="border-bottom">@a.NgayDang</p>
+            }
+                    </div>
+                </div>
+            </div>
+
+            <div class="container border border-dark">
+                @Html.Action("HienThiBinhLuan", "Home", new { IDTruyen = Model.TruyenID })
+            </div>
+
+            @if (truyenGoiY != null && truyenGoiY.Any())
+{
+                <hr />
+                <h3>Truyện Cùng Thể Loại</h3>
+                <div class="row">
+                    @foreach (var truyen in truyenGoiY)
+        {
+                        <div class="col-lg-2 col-md-3 col-sm-4 mb-4">
+                            <a href="@Url.Action("ChiTietTruyen", "Home", new { id = truyen.TruyenID })" class="text-decoration-none text-dark">
+                                <img src="~/Content/AnhBia/@truyen.AnhBia"
+                                     class="img-fluid"
+                                     style="height:150px; object-fit:cover;" />
+                                <p class="text-center mt-1">@truyen.TenTruyen</p>
+                            </a>
+                        </div>
+        }
+                </div>
+}

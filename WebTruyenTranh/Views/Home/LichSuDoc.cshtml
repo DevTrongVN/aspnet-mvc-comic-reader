@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "LichSuDoc";
+    Layout = "~/Views/Shared/DangNhap.cshtml";
+}
+
+<h2>Lịch sử đọc của bạn</h2>
+<hr />
+
+<div class="container">
+    <div class="row">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        @if (item.Truyen != null)
+                        {
+                            <a href="@Url.Action("ChiTietTruyen", "Home", new { id = item.TruyenID })">
+                                <img src="~/Content/AnhBia/@item.Truyen.AnhBia"
+                                     class="card-img-top"
+                                     alt="@item.Truyen.TenTruyen"
+                                     style="height: 300px; object-fit: cover;">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    @item.Truyen.TenTruyen
+                                </h5>
+
+                                @* Hiển thị chương đã đọc gần nhất *@
+                                @if (item.Chap != null)
+                                {
+                                    <p class="card-text">
+                                        Đã đọc: <strong>@item.Chap.TieuDe</strong>
+                                    </p>
+                                    <small class="text-muted">
+                                        Lúc: @item.NgayDocCuoi.ToString("dd/MM/yyyy HH:mm")
+                                    </small>
+                                }
+                            </div>
+                            <div class="card-footer">
+                                @* Nút đọc tiếp chính xác chương đã lưu *@
+                                @Html.ActionLink("Đọc tiếp", "AnhChap", "Home",
+                                    new { ID = item.TruyenID, chapID = item.ChapID },
+                                    new { @class = "btn btn-primary btn-block" })
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="card-body">
+                                <p class="text-danger">Truyện này có thể đã bị xóa.</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p>Bạn chưa có lịch sử đọc nào. Hãy bắt đầu đọc truyện!</p>
+            </div>
+        }
+    </div>
+</div>
+

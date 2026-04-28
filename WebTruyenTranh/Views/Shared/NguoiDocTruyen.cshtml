@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap-4.5.3-dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        /* CSS tùy chỉnh để làm thanh tìm kiếm dài ra trong Flexbox */
+        .search-container {
+            width: 100%; /* Đảm bảo form chiếm toàn bộ col-6 */
+        }
+
+        .search-form {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid bg-light">
+        <div style="background-color: #6429c2; " class="row  align-items-center">
+            <div class="col-2">
+                <a class="nav-link" href="/Home/Index">
+                    <img class="w-100" style="height:70px;" src="~/Content/Images/logo-nettruyen.png" alt="Logo" />
+                </a>
+            </div>
+
+            <div class="col-7 pt-3 pb-3">
+                <ul class="nav justify-content-center search-container">
+                    <li class="nav-item search-form">
+                        <form action="/Home/XLSearch" method="post" class="d-flex w-100">
+                            <input type="text" name="tentruyen" class="form-control flex-grow-1" placeholder="Tìm kiếm truyện..." />
+                            <button type="submit" class="btn btn-light ml-2">
+                                🔍
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-3 d-flex justify-content-end align-items-center">
+                @if (Session["User"] != null)
+                {   
+                    if ((int)Session["VaiTro"] == 1)
+                    {
+                        <a href="/Admin/Index">Chức Năng</a>
+                    }
+                    <p>Xin chào, @Session["HoTen"]!</p>
+                    <a href="/Home/DangXuat">Đăng xuất</a>
+                }
+                else
+                {
+                    <a href="/Home/DangKy">Đăng Ký</a>
+                    <h2>/</h2>
+                    <a href="/Home/DangNhap">Đăng nhập</a>
+                }
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary w-100">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/Home/Index">Trang Chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/TruyenDangTheoDoi">Theo Dõi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/LichSuDoc">Lịch sử</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/Home/TKNC">Tìm kiếm nâng cao</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-8  pt-3 pb-3">
+                    @RenderBody()
+                </div>
+                <div class="col-4">
+                    @Html.Action("TheLoai", "Home")
+                </div>
+            </div>
+        </div>
+        <div class="row" style="background-color:#ff6a00">
+            <p class="w-100 text-center">
+                Nettruyen.net.vn là web đọc truyện tranh online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên tại NetTruyen.
+            </p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="~/Content/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

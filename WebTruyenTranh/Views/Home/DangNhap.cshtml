@@ -1,0 +1,29 @@
+﻿@model WebTruyenTranh.Models.Taikhoan
+
+@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/DangNhap.cshtml";
+}
+
+<h2 class="text-center">Đăng nhập</h2>
+
+<form action="/Home/DangNhap" method="post">
+    <div class="form-group">
+        <label>Tên đăng nhập:</label>
+        <input type="text" name="TenDangNhap" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label>Mật khẩu:</label>
+        <input type="password" name="MatKhau" class="form-control" required />
+    </div>
+
+    <div class="text-danger">@ViewBag.ThongBao</div>
+
+    <button type="submit" class="btn btn-success mt-3">Đăng nhập</button>
+</form>
+
+<p>
+    Bạn chưa có tài khoản?
+    <a href="/Home/DangKy">Đăng ký ngay</a>
+</p>

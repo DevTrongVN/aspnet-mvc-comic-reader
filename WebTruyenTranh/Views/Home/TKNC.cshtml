@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "TKNC";
+    Layout = "~/Views/Shared/DangNhap.cshtml";
+}
+@using WebTruyenTranh.Models;
+@model List<TheLoai>
+    <form action="/Home/XLSearch" method="post">
+        <div>
+            <p>Tên Truyện: </p>
+            <input type="text" name="tentruyen" />
+        </div>
+        <h4>Chọn Thể Loại:</h4>
+        <div class="row">
+            @foreach (var tl in Model)
+            {
+                <div class="form-check col-2">
+                    <input type="checkbox"
+                           class="form-check-input"
+                           name="TheLoaiIDs"
+                           value="@tl.TheLoaiID"
+                           id="theloai_@tl.TheLoaiID">
+
+                    <label class="form-check-label" for="theloai_@tl.TheLoaiID">
+                        @tl.TenTheLoai
+                    </label>
+                </div>
+            }
+        </div>
+        <div>
+            <input type="submit" value="Tim" />
+        </div>
+    </form>
+

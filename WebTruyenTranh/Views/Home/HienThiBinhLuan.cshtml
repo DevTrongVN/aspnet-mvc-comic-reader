@@ -1,0 +1,59 @@
+﻿@model WebTruyenTranh.Models.BinhLuanContainer
+
+<div class="binhluan-container">
+    <h3>Bình luận</h3>
+    <hr />
+
+    @* Form thêm bình luận chỉ hiển thị nếu đã đăng nhập *@
+    @if (Session["user"] != null)
+    {
+    <div class="them-binhluan">
+        <form id="formBinhLuan" method="post" action="@Url.Action("ThemBinhLuan", "Home")">
+            <input type="hidden" name="idTruyen" value="@ViewBag.IDTruyen" />
+            <input type="hidden" name="idChap" value="@ViewBag.ChapID" />  <!-- Truyền ChapID hiện tại -->
+
+            <label>Nội dung:</label><br />
+            <textarea name="noiDung" required></textarea><br />
+
+            <button type="submit">Gửi bình luận</button>
+        </form>
+    </div>
+    }
+    else
+    {
+        <p>Đăng nhập để thêm bình luận.</p>
+    }
+
+    @* Danh sách bình luận *@
+    @if (!Model.dsBinhLuan.Any())
+    {
+        <p>Chưa có bình luận nào.</p>
+    }
+    else
+    {
+        foreach (var bl in Model.dsBinhLuan)
+        {
+            <div class="binhluan-item">
+                <strong>@bl.TenDangNhap</strong> - Chap @bl.SoChap <br />
+                <small>@bl.NgayDang.ToString("dd/MM/yyyy HH:mm")</small>
+                <div class="noidung">@bl.NoiDung</div>
+                <hr />
+            </div>
+        }
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#formBinhLuan').submit(function (e) {
+                e.preventDefault();
+                var form = $(this);
+                $.post(form.attr('action'), form.serialize(), function (data) {
+                    // Thay thế nội dung bình luận bằng partial view mới
+                    $('.binhluan-container').html(data);
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,236 @@
+﻿@model WebTruyenTranh.Models.Chap
+@{
+    ViewBag.Title = "Thêm Chương Mới";
+}
+
+<h2>Thêm Chương Mới</h2>
+
+@using (Html.BeginForm("ThemChap", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "chapForm" }))//enctype = "multipart/form-data": Bắt buộc để gửi file
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>Thông tin Chương</legend>
+
+        <div>
+            @Html.LabelFor(m => m.TruyenID, "Tên Truyện")
+            @Html.DropDownListFor(m => m.TruyenID, (SelectList)ViewBag.TruyenList, "--- Chọn Truyện ---")
+            @Html.ValidationMessageFor(m => m.TruyenID)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.TieuDe)
+            @Html.EditorFor(m => m.TieuDe)
+            @Html.ValidationMessageFor(m => m.TieuDe)
+        </div>
+
+        <hr />
+
+        <label>Chọn ảnh chương</label>
+        <input type="file" id="filePicker" accept="image/*" multiple />
+
+        <div id="previewContainer" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px"></div>@*vẽ ảnh xem trước*@
+
+        @* Hidden input giữ tên để MVC bind => name phải đúng "AnhChapFiles" để gửi file lên server *@
+        <input type="file" id="AnhChapFiles_for_submit" name="AnhChapFiles" style="display:none" multiple />
+
+        <hr />
+        <input type="submit" value="Tạo Chương" />
+    </fieldset>
+}
+
+<style>
+    /*Khung bao ngoài của 1 ảnh*/
+     .preview-item {
+        .preview-item; {
+        position: relative;
+        width: 140px;
+        height: 200px;
+        border: 1px solid #ddd;
+        padding: 4px;
+        box-sizing: border-box;
+        background: #fafafa;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    /*Ảnh bên trong*/
+     .preview-item img {
+        max-width: 100%;
+        max-height: 140px;
+        display: block;
+        margin-bottom: 6px;
+    }
+    /*Nút Xóa x*/
+     .preview-remove {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background: #c00;
+        color: #fff;
+        border: none;
+        width: 22px;
+        height: 22px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    /*Nút Kéo thả */
+    .preview-handle {
+        cursor: grab;
+        /*báo hiệu "cầm được"*/
+        position: absolute;
+        left: 4px;
+        top: 4px;
+        background: #333;
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 12px;
+    }
+
+    .preview-index {
+        position: absolute;
+        bottom: 4px;
+        right: 6px;
+        background: #000;
+        color: #fff;
+        padding: 2px 6px;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+</style>
+
+<script>
+    (function(){
+        const fileInputNative = document.getElementById("filePicker");
+        const submitFileInput = document.getElementById("AnhChapFiles_for_submit"); // hidden real input
+        const preview = document.getElementById("previewContainer");
+        const form = document.getElementById("chapForm");
+
+        let selectedFiles = []; // {id: string, file: File} Biến toàn cục
+        let uidCounter = 0;
+
+        function makeId(){ uidCounter++; return Date.now().toString(36) + "-" + uidCounter; }
+
+        // Lấy danh sách file vừa chọn
+        fileInputNative.addEventListener("change", function(e){
+            const files = Array.from(e.target.files || []);
+            files.forEach(f => {
+                // Đẩy file vào danh sách quản lý chung
+                selectedFiles.push({ id: makeId(), file: f });
+        });
+        renderPreview();
+        updateSubmitInput();//Cập nhật dữ liệu vào input
+        // Reset nút chọn
+        fileInputNative.value = "";
+    });
+
+    //hàm vẽ giao diện.
+    function renderPreview(){
+        preview.innerHTML = "";
+        selectedFiles.forEach((obj, idx) => {
+            const wrapper = document.createElement("div");
+        wrapper.className = "preview-item";
+        wrapper.draggable = true;
+        wrapper.dataset.id = obj.id;
+        wrapper.dataset.index = idx;
+
+        // Lưu lại ID của cái ảnh đang bị kéo
+        wrapper.addEventListener("dragstart", onDragStart);
+        wrapper.addEventListener("dragover", onDragOver);
+        wrapper.addEventListener("drop", onDrop);
+
+        const handle = document.createElement("div");
+        handle.className = "preview-handle";
+        handle.textContent = "≡";
+        wrapper.appendChild(handle);
+
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(obj.file);
+        img.onload = () => URL.revokeObjectURL(img.src);
+        wrapper.appendChild(img);
+
+        const nameP = document.createElement("div");
+        nameP.style = "font-size:12px;max-width:120px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap";
+        nameP.textContent = obj.file.name;
+        wrapper.appendChild(nameP);
+
+        const idxBadge = document.createElement("div");
+        idxBadge.className = "preview-index";
+        idxBadge.textContent = (idx+1);
+        wrapper.appendChild(idxBadge);
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "preview-remove";
+        btn.textContent = "×";
+        btn.addEventListener("click", function(){
+            removeById(obj.id);
+        });
+        wrapper.appendChild(btn);
+
+        preview.appendChild(wrapper);
+    });
+    }
+
+    function removeById(id){
+        const i = selectedFiles.findIndex(s => s.id === id);
+        if(i >= 0){
+            selectedFiles.splice(i,1);
+            renderPreview();
+            updateSubmitInput();
+        }
+    }
+
+    // drag/drop logic (swap positions)
+    let dragId = null;
+    function onDragStart(e){
+        const id = e.currentTarget.dataset.id;
+        dragId = id;
+        e.dataTransfer.effectAllowed = "move";
+    }
+    function onDragOver(e){
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+    }
+    function onDrop(e){
+        e.preventDefault();
+        const dropId = e.currentTarget.dataset.id;
+        if(!dragId || !dropId || dragId === dropId) return;
+        //Hoán đổi
+        const i = selectedFiles.findIndex(s => s.id === dragId);
+        const j = selectedFiles.findIndex(s => s.id === dropId);
+        if(i < 0 || j < 0) return;
+
+        // swap
+        const tmp = selectedFiles[i];
+        selectedFiles.splice(i,1);
+        selectedFiles.splice(j,0,tmp);
+
+        dragId = null;
+        renderPreview();
+        updateSubmitInput();
+    }
+
+    // rebuild hidden input (submitFileInput) using DataTransfer
+    function updateSubmitInput(){
+        try {
+            const dt = new DataTransfer();
+            selectedFiles.forEach(s => dt.items.add(s.file));
+            submitFileInput.files = dt.files; // set files in right order
+        } catch(err){
+            // fallback: cannot set input.files (older browsers) -> warn user
+            console.error("Trình duyệt của bạn không hỗ trợ.", err);
+            alert("Trình duyệt của bạn không hỗ trợ tính năng kéo-thả/sắp xếp file. Hãy dùng Chrome/Edge phiên bản mới.");
+        }
+    }
+
+    // ensure before submit we sync (defensive)
+    form.addEventListener("submit", function(e){
+        updateSubmitInput();
+        // if no files -> allow server-side validation handle it
+    });
+
+    })();
+</script>

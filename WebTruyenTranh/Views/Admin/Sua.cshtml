@@ -1,0 +1,120 @@
+﻿@model WebTruyenTranh.Models.Truyen
+
+@{
+    ViewBag.Title = "Sua";
+    // Lấy danh sách ID thể loại đã chọn từ Controller
+    List<int> selectedTheLoaiIDs = ViewBag.SelectedTheLoaiIDs as List<int> ?? new List<int>();
+}
+
+<h2>Sửa Truyện: @Model.TenTruyen</h2>
+
+@* QUAN TRỌNG: Cần thêm enctype="multipart/form-data" để upload file *@
+@using (Html.BeginForm("Sua", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Thông tin Truyện</legend>
+
+        @Html.HiddenFor(model => model.TruyenID)
+        @* Giữ lại ảnh bìa cũ để cập nhật nếu không có file mới được chọn *@
+        @Html.HiddenFor(model => model.AnhBia)
+        @* Giữ lại LuotXem để gửi về POST (hoặc có thể dùng EditorFor nhưng nên là ReadOnly) *@
+        @Html.HiddenFor(model => model.LuotXem)
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TenTruyen)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TenTruyen, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenTruyen)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDTacGia)
+        </div>
+        <div class="editor-field">
+            @* Sử dụng DropDownList cho Tác Giả *@
+            @Html.DropDownListFor(model => model.IDTacGia, (SelectList)ViewBag.TacGiaList, "--- Chọn Tác Giả ---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IDTacGia)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MoTa)
+        </div>
+        <div class="editor-field">
+            @* Sử dụng TextArea cho Mô Tả *@
+            @Html.TextAreaFor(model => model.MoTa, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.MoTa)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AnhBia)
+        </div>
+        <div class="editor-field">
+            @* Hiển thị ảnh bìa cũ và trường input file mới *@
+            @if (!string.IsNullOrEmpty(Model.AnhBia))
+            {
+                <p>Ảnh bìa hiện tại: <img src="@Url.Content("~/Content/AnhBia/" + Model.AnhBia)" alt="Ảnh Bìa" style="max-width: 100px; display: block; margin-bottom: 10px;" /></p>
+            }
+            <input type="file" name="AnhBiaFile" id="AnhBiaFile" class="form-control" accept="image/*" />
+            @Html.ValidationMessageFor(model => model.AnhBia)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SOCHAP)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SOCHAP, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SOCHAP)
+        </div>
+
+        @* Trường LuotXem chỉ dùng để hiển thị/chỉnh sửa, không cần thay đổi logic trong Controller nếu bạn muốn giữ nguyên LuotXem *@
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LuotXem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LuotXem, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LuotXem)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TinhTrang)
+        </div>
+        <div class="editor-field">
+            @* Sử dụng DropDownList cho Tình Trạng *@
+            @Html.DropDownListFor(model => model.TinhTrang, (SelectList)ViewBag.TinhTrangList, "--- Chọn Tình Trạng ---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TinhTrang)
+        </div>
+
+        @* PHẦN CHỌN NHIỀU THỂ LOẠI (Giống Them) *@
+        <div class="form-group mt-3">
+            <label>Thể Loại:</label>
+            @if (ViewBag.TheLoaiList != null)
+            {
+                foreach (var item in (List<WebTruyenTranh.Models.TheLoai>)ViewBag.TheLoaiList)
+                {
+                    <div class="form-check">
+                        @{
+                    // Kiểm tra xem ID thể loại này đã được chọn trước đó chưa
+                    bool isSelected = selectedTheLoaiIDs.Contains(item.TheLoaiID);
+                        }
+                        <input type="checkbox" name="TheLoaiIDs" value="@item.TheLoaiID" id="TheLoai_@item.TheLoaiID" @(isSelected ? "checked" : "") class="form-check-input" />
+                        <label class="form-check-label" for="TheLoai_@item.TheLoaiID">@item.TenTheLoai</label>
+                    </div>
+                }
+            }
+        </div>
+
+        <p>
+            <input type="submit" value="Lưu Thay Đổi" class="btn btn-primary mt-3" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</div>

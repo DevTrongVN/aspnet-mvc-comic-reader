@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9C982A69-648C-4827-85E7-3DC1C4C186BF}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebTruyenTranh</RootNamespace>
+    <AssemblyName>WebTruyenTranh</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DuLieu.cs" />
+    <Compile Include="Models\QLTruyen.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLTruyen.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Truyen.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\AnhBia\1.jpg" />
+    <Content Include="Content\AnhBia\10.jpg" />
+    <Content Include="Content\AnhBia\11.jpg" />
+    <Content Include="Content\AnhBia\12.jpg" />
+    <Content Include="Content\AnhBia\2.jpg" />
+    <Content Include="Content\AnhBia\3.jpg" />
+    <Content Include="Content\AnhBia\4.jpg" />
+    <Content Include="Content\AnhBia\5.jpg" />
+    <Content Include="Content\AnhBia\6.jpg" />
+    <Content Include="Content\AnhBia\7.jpg" />
+    <Content Include="Content\AnhBia\8.jpg" />
+    <Content Include="Content\AnhBia\9.jpg" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap.css" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-4.5.3-dist\js\bootstrap.bundle.js" />
+    <Content Include="Content\bootstrap-4.5.3-dist\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\bootstrap-4.5.3-dist\js\bootstrap.js" />
+    <Content Include="Content\bootstrap-4.5.3-dist\js\bootstrap.min.js" />
+    <Content Include="Content\ChapTruyen\1.jpg" />
+    <Content Include="Content\ChapTruyen\10.jpg" />
+    <Content Include="Content\ChapTruyen\100.jpg" />
+    <Content Include="Content\ChapTruyen\101.jpg" />
+    <Content Include="Content\ChapTruyen\102.jpg" />
+    <Content Include="Content\ChapTruyen\103.jpg" />
+    <Content Include="Content\ChapTruyen\104.jpg" />
+    <Content Include="Content\ChapTruyen\105.jpg" />
+    <Content Include="Content\ChapTruyen\106.jpg" />
+    <Content Include="Content\ChapTruyen\107.jpg" />
+    <Content Include="Content\ChapTruyen\108.jpg" />
+    <Content Include="Content\ChapTruyen\109.jpg" />
+    <Content Include="Content\ChapTruyen\11.jpg" />
+    <Content Include="Content\ChapTruyen\110.jpg" />
+    <Content Include="Content\ChapTruyen\111.jpg" />
+    <Content Include="Content\ChapTruyen\112.jpg" />
+    <Content Include="Content\ChapTruyen\113.jpg" />
+    <Content Include="Content\ChapTruyen\114.jpg" />
+    <Content Include="Content\ChapTruyen\115.jpg" />
+    <Content Include="Content\ChapTruyen\116.jpg" />
+    <Content Include="Content\ChapTruyen\117.jpg" />
+    <Content Include="Content\ChapTruyen\118.jpg" />
+    <Content Include="Content\ChapTruyen\119.jpg" />
+    <Content Include="Content\ChapTruyen\12.jpg" />
+    <Content Include="Content\ChapTruyen\120.jpg" />
+    <Content Include="Content\ChapTruyen\121.jpg" />
+    <Content Include="Content\ChapTruyen\122.jpg" />
+    <Content Include="Content\ChapTruyen\123.jpg" />
+    <Content Include="Content\ChapTruyen\124.jpg" />
+    <Content Include="Content\ChapTruyen\125.jpg" />
+    <Content Include="Content\ChapTruyen\126.jpg" />
+    <Content Include="Content\ChapTruyen\127.jpg" />
+    <Content Include="Content\ChapTruyen\128.jpg" />
+    <Content Include="Content\ChapTruyen\129.jpg" />
+    <Content Include="Content\ChapTruyen\13.jpg" />
+    <Content Include="Content\ChapTruyen\130.jpg" />
+    <Content Include="Content\ChapTruyen\131.jpg" />
+    <Content Include="Content\ChapTruyen\132.jpg" />
+    <Content Include="Content\ChapTruyen\133.jpg" />
+    <Content Include="Content\ChapTruyen\134.jpg" />
+    <Content Include="Content\ChapTruyen\135.jpg" />
+    <Content Include="Content\ChapTruyen\136.jpg" />
+    <Content Include="Content\ChapTruyen\137.jpg" />
+    <Content Include="Content\ChapTruyen\138.jpg" />
+    <Content Include="Content\ChapTruyen\139.jpg" />
+    <Content Include="Content\ChapTruyen\14.jpg" />
+    <Content Include="Content\ChapTruyen\140.jpg" />
+    <Content Include="Content\ChapTruyen\141.jpg" />
+    <Content Include="Content\ChapTruyen\142.jpg" />
+    <Content Include="Content\ChapTruyen\143.jpg" />
+    <Content Include="Content\ChapTruyen\144.jpg" />
+    <Content Include="Content\ChapTruyen\145.jpg" />
+    <Content Include="Content\ChapTruyen\146.jpg" />
+    <Content Include="Content\ChapTruyen\147.jpg" />
+    <Content Include="Content\ChapTruyen\148.jpg" />
+    <Content Include="Content\ChapTruyen\149.jpg" />
+    <Content Include="Content\ChapTruyen\15.jpg" />
+    <Content Include="Content\ChapTruyen\150.jpg" />
+    <Content Include="Content\ChapTruyen\151.jpg" />
+    <Content Include="Content\ChapTruyen\152.jpg" />
+    <Content Include="Content\ChapTruyen\153.jpg" />
+    <Content Include="Content\ChapTruyen\154.jpg" />
+    <Content Include="Content\ChapTruyen\155.jpg" />
+    <Content Include="Content\ChapTruyen\156.jpg" />
+    <Content Include="Content\ChapTruyen\157.jpg" />
+    <Content Include="Content\ChapTruyen\158.jpg" />
+    <Content Include="Content\ChapTruyen\159.jpg" />
+    <Content Include="Content\ChapTruyen\16.jpg" />
+    <Content Include="Content\ChapTruyen\160.jpg" />
+    <Content Include="Content\ChapTruyen\161.jpg" />
+    <Content Include="Content\ChapTruyen\162.jpg" />
+    <Content Include="Content\ChapTruyen\163.jpg" />
+    <Content Include="Content\ChapTruyen\164.jpg" />
+    <Content Include="Content\ChapTruyen\165.jpg" />
+    <Content Include="Content\ChapTruyen\166.jpg" />
+    <Content Include="Content\ChapTruyen\167.jpg" />
+    <Content Include="Content\ChapTruyen\168.jpg" />
+    <Content Include="Content\ChapTruyen\169.jpg" />
+    <Content Include="Content\ChapTruyen\17.jpg" />
+    <Content Include="Content\ChapTruyen\170.jpg" />
+    <Content Include="Content\ChapTruyen\171.jpg" />
+    <Content Include="Content\ChapTruyen\172.jpg" />
+    <Content Include="Content\ChapTruyen\173.jpg" />
+    <Content Include="Content\ChapTruyen\174.jpg" />
+    <Content Include="Content\ChapTruyen\175.jpg" />
+    <Content Include="Content\ChapTruyen\176.jpg" />
+    <Content Include="Content\ChapTruyen\177.jpg" />
+    <Content Include="Content\ChapTruyen\178.jpg" />
+    <Content Include="Content\ChapTruyen\179.jpg" />
+    <Content Include="Content\ChapTruyen\18.jpg" />
+    <Content Include="Content\ChapTruyen\180.jpg" />
+    <Content Include="Content\ChapTruyen\181.jpg" />
+    <Content Include="Content\ChapTruyen\182.jpg" />
+    <Content Include="Content\ChapTruyen\183.jpg" />
+    <Content Include="Content\ChapTruyen\184.jpg" />
+    <Content Include="Content\ChapTruyen\185.jpg" />
+    <Content Include="Content\ChapTruyen\186.jpg" />
+    <Content Include="Content\ChapTruyen\187.jpg" />
+    <Content Include="Content\ChapTruyen\188.jpg" />
+    <Content Include="Content\ChapTruyen\189.jpg" />
+    <Content Include="Content\ChapTruyen\19.jpg" />
+    <Content Include="Content\ChapTruyen\190.jpg" />
+    <Content Include="Content\ChapTruyen\191.jpg" />
+    <Content Include="Content\ChapTruyen\2.jpg" />
+    <Content Include="Content\ChapTruyen\20.jpg" />
+    <Content Include="Content\ChapTruyen\21.jpg" />
+    <Content Include="Content\ChapTruyen\22.jpg" />
+    <Content Include="Content\ChapTruyen\23.jpg" />
+    <Content Include="Content\ChapTruyen\24.jpg" />
+    <Content Include="Content\ChapTruyen\25.jpg" />
+    <Content Include="Content\ChapTruyen\26.jpg" />
+    <Content Include="Content\ChapTruyen\27.jpg" />
+    <Content Include="Content\ChapTruyen\28.jpg" />
+    <Content Include="Content\ChapTruyen\29.jpg" />
+    <Content Include="Content\ChapTruyen\3.jpg" />
+    <Content Include="Content\ChapTruyen\30.jpg" />
+    <Content Include="Content\ChapTruyen\31.jpg" />
+    <Content Include="Content\ChapTruyen\32.jpg" />
+    <Content Include="Content\ChapTruyen\33.jpg" />
+    <Content Include="Content\ChapTruyen\34.jpg" />
+    <Content Include="Content\ChapTruyen\35.jpg" />
+    <Content Include="Content\ChapTruyen\36.jpg" />
+    <Content Include="Content\ChapTruyen\37.jpg" />
+    <Content Include="Content\ChapTruyen\38.jpg" />
+    <Content Include="Content\ChapTruyen\39.jpg" />
+    <Content Include="Content\ChapTruyen\4.jpg" />
+    <Content Include="Content\ChapTruyen\40.jpg" />
+    <Content Include="Content\ChapTruyen\41.jpg" />
+    <Content Include="Content\ChapTruyen\42.jpg" />
+    <Content Include="Content\ChapTruyen\43.jpg" />
+    <Content Include="Content\ChapTruyen\44.jpg" />
+    <Content Include="Content\ChapTruyen\45.jpg" />
+    <Content Include="Content\ChapTruyen\46.jpg" />
+    <Content Include="Content\ChapTruyen\47.jpg" />
+    <Content Include="Content\ChapTruyen\48.jpg" />
+    <Content Include="Content\ChapTruyen\49.jpg" />
+    <Content Include="Content\ChapTruyen\5.jpg" />
+    <Content Include="Content\ChapTruyen\50.jpg" />
+    <Content Include="Content\ChapTruyen\51.jpg" />
+    <Content Include="Content\ChapTruyen\52.jpg" />
+    <Content Include="Content\ChapTruyen\53.jpg" />
+    <Content Include="Content\ChapTruyen\54.jpg" />
+    <Content Include="Content\ChapTruyen\55.jpg" />
+    <Content Include="Content\ChapTruyen\56.jpg" />
+    <Content Include="Content\ChapTruyen\57.jpg" />
+    <Content Include="Content\ChapTruyen\58.jpg" />
+    <Content Include="Content\ChapTruyen\59.jpg" />
+    <Content Include="Content\ChapTruyen\6.jpg" />
+    <Content Include="Content\ChapTruyen\60.jpg" />
+    <Content Include="Content\ChapTruyen\61.jpg" />
+    <Content Include="Content\ChapTruyen\62.jpg" />
+    <Content Include="Content\ChapTruyen\63.jpg" />
+    <Content Include="Content\ChapTruyen\64.jpg" />
+    <Content Include="Content\ChapTruyen\65.jpg" />
+    <Content Include="Content\ChapTruyen\66.jpg" />
+    <Content Include="Content\ChapTruyen\67.jpg" />
+    <Content Include="Content\ChapTruyen\68.jpg" />
+    <Content Include="Content\ChapTruyen\69.jpg" />
+    <Content Include="Content\ChapTruyen\7.jpg" />
+    <Content Include="Content\ChapTruyen\70.jpg" />
+    <Content Include="Content\ChapTruyen\71.jpg" />
+    <Content Include="Content\ChapTruyen\72.jpg" />
+    <Content Include="Content\ChapTruyen\73.jpg" />
+    <Content Include="Content\ChapTruyen\74.jpg" />
+    <Content Include="Content\ChapTruyen\75.jpg" />
+    <Content Include="Content\ChapTruyen\76.jpg" />
+    <Content Include="Content\ChapTruyen\77.jpg" />
+    <Content Include="Content\ChapTruyen\78.jpg" />
+    <Content Include="Content\ChapTruyen\79.jpg" />
+    <Content Include="Content\ChapTruyen\8.jpg" />
+    <Content Include="Content\ChapTruyen\80.jpg" />
+    <Content Include="Content\ChapTruyen\81.jpg" />
+    <Content Include="Content\ChapTruyen\82.jpg" />
+    <Content Include="Content\ChapTruyen\83.jpg" />
+    <Content Include="Content\ChapTruyen\84.jpg" />
+    <Content Include="Content\ChapTruyen\85.jpg" />
+    <Content Include="Content\ChapTruyen\86.jpg" />
+    <Content Include="Content\ChapTruyen\87.jpg" />
+    <Content Include="Content\ChapTruyen\88.jpg" />
+    <Content Include="Content\ChapTruyen\89.jpg" />
+    <Content Include="Content\ChapTruyen\9.jpg" />
+    <Content Include="Content\ChapTruyen\90.jpg" />
+    <Content Include="Content\ChapTruyen\91.jpg" />
+    <Content Include="Content\ChapTruyen\92.jpg" />
+    <Content Include="Content\ChapTruyen\93.jpg" />
+    <Content Include="Content\ChapTruyen\94.jpg" />
+    <Content Include="Content\ChapTruyen\95.jpg" />
+    <Content Include="Content\ChapTruyen\96.jpg" />
+    <Content Include="Content\ChapTruyen\97.jpg" />
+    <Content Include="Content\ChapTruyen\98.jpg" />
+    <Content Include="Content\ChapTruyen\99.jpg" />
+    <Content Include="Content\Images\logo-nettruyen.png" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="packages.config" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-4.5.3-dist\css\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap-4.5.3-dist\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap-4.5.3-dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\bootstrap-4.5.3-dist\js\bootstrap.js.map" />
+    <Content Include="Content\bootstrap-4.5.3-dist\js\bootstrap.min.js.map" />
+    <Content Include="Models\QLTruyen.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>QLTruyen.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\NguoiDocTruyen.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\TheLoai.cshtml" />
+    <Content Include="Views\Home\ChiTietTruyen.cshtml" />
+    <Content Include="Views\Home\DangKy.cshtml" />
+    <Content Include="Views\Shared\DangNhap.cshtml" />
+    <Content Include="Views\Home\DangNhap.cshtml" />
+    <Content Include="Views\Home\TKNC.cshtml" />
+    <Content Include="Views\Home\KetQuaTimKiem.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Them.cshtml" />
+    <Content Include="Views\Admin\Sua.cshtml" />
+    <Content Include="Views\Home\AnhChap.cshtml" />
+    <Content Include="Views\Admin\ThemChap.cshtml" />
+    <Content Include="Views\Home\HienThiBinhLuan.cshtml" />
+    <Content Include="Views\Home\LichSuDoc.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\QLTruyen.dbml.layout">
+      <DependentUpon>QLTruyen.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51163</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51163/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
